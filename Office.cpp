@@ -57,11 +57,7 @@ int main(int argc, char *argv[]){
       }
     }
 
-    //queue holds all students wait times
-
-    //this insert 0 ot lal places
     int currWait = 0;
-    bool y = false;
     if(tempStudents<numWindows){
       for(int i = 1; i<=tempStudents; i++){
         waitTimes.insert(0);
@@ -73,7 +69,6 @@ int main(int argc, char *argv[]){
     }
 
     while(!queue.isEmpty()){
-      y = true;
       for(int i = 0; i<numWindows; i++){
         if(windows[i]->getStudent()->getTimeTaken() == 0){
           if(!queue.isEmpty()){
@@ -97,28 +92,31 @@ int main(int argc, char *argv[]){
       maxWait = currWait-1;
     }
 
-    int x = 0;
+    int timetakentemp = 0;
+
     for(int i = 0; i<numWindows; i++){
       if(!windows[i]->isIdle()){
-        if(x<windows[i]->getStudent()->getTimeTaken()){
-          x = windows[i]->getStudent()->getTimeTaken();
+        if(timetakentemp<windows[i]->getStudent()->getTimeTaken()){
+          timetakentemp = windows[i]->getStudent()->getTimeTaken();
         }
       }
     }
 
+
     for(int i = 0; i<numWindows; i++){
       if(!windows[i]->isIdle()){
-        windows[i]->setTotalIdle(windows[i]->getTotalIdle() + (x-windows[i]->getStudent()->getTimeTaken()));
-        windows[i]->setCurrIdle(x-windows[i]->getStudent()->getTimeTaken());
-      }else if(y){
-        windows[i]->setTotalIdle(windows[i]->getTotalIdle() + x + 1);
-        windows[i]->setCurrIdle(x + 1);
+        windows[i]->setTotalIdle(windows[i]->getTotalIdle() + (timetakentemp-windows[i]->getStudent()->getTimeTaken()));
+        windows[i]->setCurrIdle(timetakentemp-windows[i]->getStudent()->getTimeTaken());
+      }else if(queue.isEmpty()){
+        windows[i]->setTotalIdle(windows[i]->getTotalIdle() + timetakentemp + 1);
+        windows[i]->setCurrIdle(timetakentemp + 1);//if empty, its time taken + 1
       }else{
-        windows[i]->setTotalIdle(windows[i]->getTotalIdle() + x);
-        windows[i]->setCurrIdle(x);
+        windows[i]->setTotalIdle(windows[i]->getTotalIdle() + timetakentemp);
+        windows[i]->setCurrIdle(timetakentemp);
       }
     }
 
+    //set max idle time
     for(int i = 0; i<numWindows; i++){
       if(maxIdle < windows[i]->getCurrIdle()){
         maxIdle = windows[i]->getCurrIdle();
