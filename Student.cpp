@@ -8,9 +8,9 @@ Student::Student(){
   timeTaken = 0;
 }
 
-Student::Student(int d){
+Student::Student(int t){
   waitTime = 0;
-  timeTaken = d;
+  timeTaken = t;
 }
 
 Student::~Student(){
@@ -25,10 +25,6 @@ int Student::getWaitTime(){
   return waitTime;
 }
 
-void Student::setWait(int d){
-  waitTime = d;
-}
-
-void Student::decrementTime(){
-  timeTaken--;
+void Student::setWait(int t){
+  waitTime = t;
 }

@@ -3,7 +3,6 @@
 template <typename T>
 class ListNode{
 public:
-  ListNode();
   ListNode(T d);
   ~ListNode();
 
@@ -13,14 +12,9 @@ public:
 };
 
 template <typename T>
-ListNode<T>::ListNode(){
-
-}
-
-template <typename T>
 ListNode<T>::ListNode(T d){
   data = d;
-  next = NULL; //null pointer
+  next = NULL;
   prev = NULL;
 }
 

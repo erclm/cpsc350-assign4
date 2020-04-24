@@ -5,12 +5,11 @@ class Student
 {
 public:
   Student();
-  Student(int d);
+  Student(int t);
   ~Student();
   int waitTime;
   int timeTaken;
   int getTimeTaken();
   int getWaitTime();
-  void setWait(int d);
-  void decrementTime();
+  void setWait(int t);
 };

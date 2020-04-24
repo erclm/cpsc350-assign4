@@ -78,7 +78,7 @@ int main(int argc, char *argv[]){
         if(windows[i]->getStudent()->getTimeTaken() == 0){
           if(!queue.isEmpty()){
             windows[i]->setStudent(queue.remove());
-            windows[i]->getStudent()->decrementTime();
+            windows[i]->getStudent()->timeTaken--;
             totalWait = totalWait + currWait;
             waitTimes.insert(currWait);
             if(currWait>=10){
@@ -88,7 +88,7 @@ int main(int argc, char *argv[]){
             windows[i]->setStudent(NULL);
           }
         }else{
-          windows[i]->getStudent()->decrementTime();
+          windows[i]->getStudent()->timeTaken--;
         }
       }
       currWait++;

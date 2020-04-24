@@ -12,8 +12,8 @@ public:
   Window();
   ~Window();
 
-  void setCurrIdle(int d);
-  void setTotalIdle(int d);
+  void setCurrIdle(int t);
+  void setTotalIdle(int t);
   int getCurrIdle();
   int getTotalIdle();
   bool isIdle();

@@ -11,12 +11,12 @@ Window::~Window(){
   delete student;
 }
 
-void Window::setCurrIdle(int d){
-  currIdleTime = d;
+void Window::setCurrIdle(int t){
+  currIdleTime = t;
 }
 
-void Window::setTotalIdle(int d){
-  totalIdleTime = d;
+void Window::setTotalIdle(int t){
+  totalIdleTime = t;
 }
 
 int Window::getCurrIdle(){
