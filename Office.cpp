@@ -58,6 +58,8 @@ int main(int argc, char *argv[]){
     }
 
     int currWait = 0;
+    bool empty = false;//not sure why but i need this bool because if not, the max idle becomes idletime +1 for some reason
+
     if(tempStudents<numWindows){
       for(int i = 1; i<=tempStudents; i++){
         waitTimes.insert(0);
@@ -69,6 +71,7 @@ int main(int argc, char *argv[]){
     }
 
     while(!queue.isEmpty()){
+      empty = true;
       for(int i = 0; i<numWindows; i++){
         if(windows[i]->getStudent()->getTimeTaken() == 0){
           if(!queue.isEmpty()){
@@ -88,6 +91,7 @@ int main(int argc, char *argv[]){
       }
       currWait++;
     }
+
     if(maxWait<currWait-1){
       maxWait = currWait-1;
     }
@@ -107,9 +111,9 @@ int main(int argc, char *argv[]){
       if(!windows[i]->isIdle()){
         windows[i]->setTotalIdle(windows[i]->getTotalIdle() + (timetakentemp-windows[i]->getStudent()->getTimeTaken()));
         windows[i]->setCurrIdle(timetakentemp-windows[i]->getStudent()->getTimeTaken());
-      }else if(queue.isEmpty()){
+      }else if(empty){//if empty, just set max idle = time taken
         windows[i]->setTotalIdle(windows[i]->getTotalIdle() + timetakentemp + 1);
-        windows[i]->setCurrIdle(timetakentemp + 1);//if empty, its time taken + 1
+        windows[i]->setCurrIdle(timetakentemp + 1);
       }else{
         windows[i]->setTotalIdle(windows[i]->getTotalIdle() + timetakentemp);
         windows[i]->setCurrIdle(timetakentemp);
